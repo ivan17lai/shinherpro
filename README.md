@@ -12,18 +12,18 @@ from shinherpro import TYAI
 ```
 model = TYAI.model_setup(model_path)
 ```
-### official_model(Version) 提供了官方的驗證碼辨識模型,目前僅支持5.1版本(開發中功能)
+#### official_model(Version) 提供了官方的驗證碼辨識模型,目前僅支持5.1版本(開發中功能)
 ```
 model_path = official_model(5.1)
 model = model_setup(model_path)
 ```
 ## setup chrome driver
-### chrome_driver_setup(url,view) 用於打開chrome driver 並開啟指定網址,,回傳的內容將作為get grade()使用的必要引數.
+#### chrome_driver_setup(url,view) 用於打開chrome driver 並開啟指定網址,,回傳的內容將作為get grade()使用的必要引數.
 ```
 driver = TYAI.chrome_driver_setup(url,view)
 ```
-### url為指定的網址,view可指定模擬遊覽器執行時是否要顯示實體頁面.
-### urlGet() 提供了TYAI的成績查詢連結
+#### url為指定的網址,view可指定模擬遊覽器執行時是否要顯示實體頁面.
+#### urlGet() 提供了TYAI的成績查詢連結
 ```
 url = TYAI.urlGet() = "https://sai.tyai.tyc.edu.tw/online/"
 driver = TYAI.chrome_driver_setup(url,True)
@@ -33,13 +33,13 @@ driver = TYAI.chrome_driver_setup(url,True)
 ```
 TYAI.getGrades(username, password, driver, model,examname,LowConfidence):
 ```
-### driver、model 為提前初始化所取得的回傳值
-### username, password 為帳號密碼
-### exam 為考試列表需準確無誤
-### LowConfidence 非必填，預設為85，為驗證碼AI的準確度要求，若AI判斷本次驗證碼準確率低於指定值，則會重新整理網頁獲取新的驗證碼。
-### 可以根據 code 的值來判斷返回結果的狀態，並根據需要處理相應的資訊。code 0 正常回傳成績 , code 1 帳號密碼錯誤 , code 2 登入失敗次數過多 , code 3 未知的錯誤訊息 
+#### driver、model 為提前初始化所取得的回傳值
+#### username, password 為帳號密碼
+#### exam 為考試列表需準確無誤
+#### LowConfidence 非必填，預設為85，為驗證碼AI的準確度要求，若AI判斷本次驗證碼準確率低於指定值，則會重新整理網頁獲取新的驗證碼。
+#### 可以根據 code 的值來判斷返回結果的狀態，並根據需要處理相應的資訊。code 0 正常回傳成績 , code 1 帳號密碼錯誤 , code 2 登入失敗次數過多 , code 3 未知的錯誤訊息 
 
-### 如果登入成功，成績查詢成功，則返回以下格式的json：
+#### 如果登入成功，成績查詢成功，則返回以下格式的json：
 ```
 {
     "code": 0,
@@ -66,26 +66,26 @@ TYAI.getGrades(username, password, driver, model,examname,LowConfidence):
     "科別排名": "科別排名"
 }
 ```
-### 其中，code 表示返回的狀態碼，0 表示成功。其他鍵值對表示成績資訊，包括考試標題、學號、姓名、班級、考試科目成績、總分、平均分數、排名和科別排名。考試科目成績 是一個列表，每個元素表示一個考試科目的成績，包括考試科目名稱和對應的成績。如果登入失敗，則返回以下格式的字典：
+#### 其中，code 表示返回的狀態碼，0 表示成功。其他鍵值對表示成績資訊，包括考試標題、學號、姓名、班級、考試科目成績、總分、平均分數、排名和科別排名。考試科目成績 是一個列表，每個元素表示一個考試科目的成績，包括考試科目名稱和對應的成績。如果登入失敗，則返回以下格式的字典：
 ```
 {
     "code": 1,
     "reason": "帳號或密碼錯誤,請重新登入!"
 }
 ```
-### 其中，code 表示返回的狀態碼，1 表示帳號或密碼錯誤。reason 表示錯誤原因的描述。如果登入失敗次數過多，則返回以下格式的字典：
+#### 其中，code 表示返回的狀態碼，1 表示帳號或密碼錯誤。reason 表示錯誤原因的描述。如果登入失敗次數過多，則返回以下格式的字典：
 ```
 {
     "code": 2,
     "reason": "帳號登入失敗次數過多，請於15分鐘後再嘗試登入!!"
 }
 ```
-### 其中，code 表示返回的狀態碼，2 表示登入失敗次數過多。reason 表示錯誤原因的描述。如果其他未知錯誤發生，則返回以下格式的字典：
+#### 其中，code 表示返回的狀態碼，2 表示登入失敗次數過多。reason 表示錯誤原因的描述。如果其他未知錯誤發生，則返回以下格式的字典：
 ```
 {
     "code": 3,
     "reason": "錯誤原因"
 }
 ```
-### 其中，code 表示返回的狀態碼，3 表示未知錯誤。reason 表示錯誤原因的描述。
+#### 其中，code 表示返回的狀態碼，3 表示未知錯誤。reason 表示錯誤原因的描述。
 

@@ -29,7 +29,7 @@ url = TYAI.urlGet() = "https://sai.tyai.tyc.edu.tw/online/"
 driver = TYAI.chrome_driver_setup(url,True)
 ```
 ## get grade
-### TYAI.getGrades() 函式用於獲取成績資訊。你需要提供(學號、密碼(身分證字號)、WebDriver對象、AI模型、考試名稱)作為輸入參數。函式內部進行驗證碼辨識、登入操作，然後切換到成績查詢頁面，獲取成績表格的 HTML 內容,並使用json格式回傳.
+#### TYAI.getGrades() 函式用於獲取成績資訊。你需要提供(學號、密碼(身分證字號)、WebDriver對象、AI模型、考試名稱)作為輸入參數。函式內部進行驗證碼辨識、登入操作，然後切換到成績查詢頁面，獲取成績表格的 HTML 內容,並使用json格式回傳.
 ```
 TYAI.getGrades(username, password, driver, model,examname,LowConfidence):
 ```

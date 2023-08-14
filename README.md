@@ -1,5 +1,7 @@
 # Shinher-Pro V1.6.3
 
+## ( 8/4 後網站更新 此版本不在可用)
+
 [![PyPI Version](https://img.shields.io/pypi/v/shinherpro.svg)](https://pypi.org/project/shinherpro/1.6.1/)
 ### 這個程式是一個自動化的成績查詢工具，它使用 Selenium 和 BeautifulSoup 套件來模擬網頁瀏覽和解析 HTML 內容，並使用 Keras 加載自訓練的 AI 模型進行圖形驗證碼自動辨識。它可以自動登入到支援的成績查詢網站，通常是欣河線上查詢系統，只需輸入帳號密碼，程序會自動操作到成績業面並返回成績，跳過原先繁雜的操作。
 

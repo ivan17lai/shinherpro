@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --text-color: black ;
+
+            --MainGrade-color: rgb(13, 236, 32) ;
+            
+            --classAveragedifference-color: rgb(13, 236, 32) ;
+            --classAverage-color: rgb(13, 236, 32) ;
+
+            --sumGrade-color: rgb(13, 236, 32) ;
+            --sumAverage-color: rgb(13, 236, 32) ;
+            --sumChange-color: rgb(13, 236, 32) ;
+
+        }
+        
+        .allpage {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fafafa;
+            border: 1px solid #dddddd;
+            overflow: hidden;
+
+        
+        }
+
+
+
+        .logo-title {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100%;
+            margin: 30px auto;
+        }
+
+
+        .Main {
+            background-color: #ffffff;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            height: 100%;
+        }
+
+        .page2 {
+            background-color: #ffffff;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            height: 100%;
+            display: none;
+        }
+
+        .input {
+            text-align: left;
+        }
+
+        .width {
+            margin: 0 auto;
+            border: 2px solid #dddddd;
+            width: 90%;
+            height: 90%;
+        }
+
+        .separator {
+            border-bottom: 1px solid #dddddd;
+            margin: 20px 0;
+        }
+
+
+
+
+        .device-pc
+        .device-phone
+        .note {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .device-pc {
+            display: none;
+        }
+
+        .device-phone {
+            display: block;
+        }
+
+
+        .down {
+            padding: 20px;
+            text-align: center;
+            height: 10%;
+            margin: 5px;
+        }
+
+        .seviceCheak {
+            display: flex;
+
+        }
+
+        .terms-container {
+            text-align: left;
+            width: 100%;
+            margin-left: 2%;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .terms-header {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .terms-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+            
+        }
+
+        .terms-content.active {
+            display: block;
+        }
+        
+        #applyButton {
+            width: 150px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+
+        @media only screen and (min-width: 1500px) {
+            
+            .width {
+                width: 30%;
+            }
+
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="allpage" style="font-family: monospace; text-align: center;">
+
+        <div class="container" >
+
+
+            <div class="logo-title" style="font-size: 20px; font-weight: bold; font-family: monospace; color: #000000; text-align: center; vertical-align: middle; line-height: 100%;">ShinherPRO</div>
+
+            <div class="width">
+
+                <div class="Main">
+
+                    <div class="pageUp">
+                        
+                        <h1 style="color: #383838;">訂閱服務🔔</h1>
+                        <h2 style="color: #525252;">立即獲得即時段考成績公布通知</h2>
+
+
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <h4 style="color: #525252; margin: 0;">訂閱後，在段考成績公布時</h4>
+                    <h4 style="color: #525252; margin: 0;">你將可以在Email信箱收到即時的成績通知單</h4>
+
+                    <div class="separator"></div>
+
+
+                    <div class="inp">
+                        <div class="input" style="flex: auto;margin-left: 12%;margin-right: 15%;">
+                        
+                            <h4 style="color: #383838;;margin: 0;">帳號</h5>
+                            <input type="text" id="number" placeholder="輸入學號" style="width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px;">
+                            <h4 style="color: #383838;;margin: 0;">密碼</h5>
+                            <input type="text" id="ID" placeholder="輸入身分證" style="width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px;">
+                            <h4 style="color: #383838;;margin: 0;">信箱</h5>
+                            <input type="text" id="emailadd" placeholder="輸入你要接收提醒的信箱" style="width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px;">
+    
+                            
+                            <div class="terms-container">
+                                <div class="terms-header" onclick="toggleTerms()">服務條款</div>
+                                <div class="terms-content" id="termsText">
+                                    <P>1.我們沒有足夠的能力確保帳號密碼的安全性，相關風險請自行評估，但我們會盡力保護帳密之安全性。</P>
+                                    <p>2.我們將使用你提供的帳號以及密碼，以自動化登入的方式登入北科附工智慧校園平台，蒐集所有提供之服務的必要資料，包含你的個人資料、所有成績，並且我們不會將你的資料用於本系統服務之外的用途。</p>
+                                    <p>3.為了提供即時排名預測，我們可能會使用你的相關資料進行分析，在去除身分識別後，用於其他使用者的分析。</p>
+                                    <p>4.本服務位於開發及測試階段，可能會有不可預期的錯誤，敬請見諒，所有的資訊以校方公布為準。</p>
+                                    <p>5.本系統僅供學術研究用途</p>
+                                </div>
+                            </div>
+                        
+                            <script>
+                                function toggleTerms() {
+                                    var termsContent = document.getElementById('termsText');
+                                    termsContent.classList.toggle('active');
+                                }
+                            </script>
+
+                            <div class="seviceCheak">
+                            
+                                <input type="checkbox" id="confirmationCheckbox" style="margin-top: 5px; margin-bottom: 5px;">
+                                <h4 style="color: #383838;;margin: 5px;">同意服務條款</h4>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="send">
+
+                        <button id="applyButton" onclick="applyButtonClick()">申請</button>
+
+                        <script>
+                            function applyButtonClick() {
+                              var checkbox = document.getElementById("confirmationCheckbox");
+                              if(checkbox.checked == false){
+                                alert("請勾選同意服務條款");
+                              }else{
+
+                                var inputValue = document.getElementById("number").value;
+                                
+                                var idInput = document.getElementById("ID").value.toUpperCase();
+                                var regex1 = /^[A-Z][12]\d{8}$/;
+
+                                var emailInput = document.getElementById("emailadd").value;
+                                var regex2 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                                if (!(inputValue.length === 6)) {
+                                    alert("學號輸入錯誤🥺");
+                                } else if(!inputValue.startsWith("0133")){
+                                    alert("sorry😢 目前僅提供電子三甲 學號0133的班級使用");
+                                } else if (!regex1.test(idInput)) {
+                                    alert("身分證格式錯誤🥺");
+                                } else if(!regex2.test(emailInput)){
+                                    alert("信箱格式錯誤🥺");
+                                } else {
+                                    var schoolNumber = document.getElementById("number").value;
+                                    var studentID = document.getElementById("ID").value;
+                                    var url = `https://8926-180-217-42-146.ngrok-free.app/login?schoolNumber=${schoolNumber}&studentID=${studentID}`;
+                                    fetch(url)
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        console.log(data);
+                                        if(data != "fail"){
+                                            document.querySelector('.Main').style.display = 'none';
+                                            document.querySelector('.page2').style.display = 'block';
+                                            document.getElementById("username").innerHTML = "Hi~" + data;
+                                            document.getElementById("mail").innerHTML =  document.getElementById("emailadd").value;
+                                        }else{
+                                            alert("登入失敗，請檢察帳號或密碼");
+                                        }
+                                        
+                                    })
+                                    .catch(error => {
+                                        alert("出現問題，請稍後再試");
+                                        console.error('Error:', error);
+                                    });
+                                }
+
+                              }
+    
+                            }
+                        </script>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="page2">
+
+                    <div class="pageUp">
+                        
+                        <h1 style="color: #383838;">成功訂閱</h1>
+                        <h2 style="color: #525252;" id="username"></h2>
+
+                        <div class="separator"></div>
+
+                        <h2 style="color: #525252;">在期末考期間，所有公布到系統上的成績都會即時發送到</h2>
+                        <h2 style="color: #525252;" id="mail"></h2>
+
+
+                    </div>
+
+
+
+                </div>
+
+                
+            </div>
+
+            <div class="down">
+
+                <p class="note" style="color: #474747;">ShinherPRO 2.0, 2024-1-13 </p>
+                <p class="note" style="color: #474747;">Design for TYAI</p>
+
+            </div>
+            
+        </div>
+
+        
+
+    </div>
+</html>
+</html>

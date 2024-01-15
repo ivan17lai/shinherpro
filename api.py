@@ -138,14 +138,24 @@ def writeData(args,name,number):
 
     b_column_data = worksheet.col_values(2)
 
-    if data_to_append[0] not in b_column_data:
-        worksheet.append_row(data_to_append)
-        print("數據已成功添加到試算表。")
-        send_mail(arg3,name,number)
+    index_to_replace = None
+    for i, value in enumerate(b_column_data):
+        if str(data_to_append[0]) == value:
+            
+            index_to_replace = i+1
+
+    if index_to_replace is not None:
+        
+        cell = worksheet.find(str(data_to_append[0]), in_column=2)
+        worksheet.update(f'B{cell.row}:E{cell.row}', values=[data_to_append], value_input_option='RAW')
+        print("數據已成功替換試算表中的相同行。")
+        send_mail(arg3, name, number)
         response = "success"
     else:
-        print("B列已經存在相同的宿。")
-        response = "error"
+        worksheet.append_row(data_to_append)
+        print("數據已成功添加到試算表。")
+        send_mail(arg3, name, number)
+        response = "success"
 
     print("數據已成功寫入試算表。")
 

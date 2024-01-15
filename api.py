@@ -38,14 +38,14 @@ def send_mail(mailadd,name,number):
 
     subject = f'Hi!{name},歡迎使用shinherPro🙂'
 
-    file_path = 'templates\\cheakMail.html'
+    file_path = 'templates/cheakMail.html'
     with open(file_path, 'r', encoding='utf-8') as file:
         html_content = file.read()
 
     beta_user = ['013333','013314','013322','013325','013315','013304','013328','013335','013320','013308','013326','013321']
 
     if number in beta_user:
-        file_path = 'templates\\betauser.html'
+        file_path = 'templates/betauser.html'
         with open(file_path, 'r', encoding='utf-8') as file:
             beta_html_content = file.read()
         html_content = html_content.replace('<!--beta User-->',beta_html_content)

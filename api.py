@@ -72,8 +72,10 @@ def example():
 
     arg1 = request.args.get('schoolNumber')
     arg2 = request.args.get('studentID')
+    arg3 = request.args.get('examname')
 
-    response = tyaiShinher.get_score(arg1, arg2)
+
+    response = tyaiShinher.get_score(arg1, arg2,arg3)
     end_time = time.time()
     elapsed_time = end_time - start_time
 

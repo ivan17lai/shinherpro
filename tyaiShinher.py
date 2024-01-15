@@ -194,7 +194,7 @@ def login(student_number,student_id):
 
 
 
-def get_score(student_number,student_id):
+def get_score(student_number,student_id,examname):
 
     login_url = 'https://shcloud11.k12ea.gov.tw/TYAITYC/Auth/Auth/CloudLogin'
     check_url = 'https://shcloud11.k12ea.gov.tw/TYAITYC/Auth/Auth/DoCloudLoginCheck'
@@ -340,7 +340,7 @@ def get_score(student_number,student_id):
         '__RequestVerificationToken': token_value,
         'Year': '112',
         'Term': '1',
-        'ExamNo': '期中考2_1'
+        'ExamNo': examname
     }
 
     response_second_post = session.post(getScore_url, data=second_post_data, headers=headers,cookies=session.cookies)

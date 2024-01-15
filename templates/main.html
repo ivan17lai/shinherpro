@@ -111,7 +111,6 @@
         .terms-container {
             text-align: left;
             width: 100%;
-            margin-left: 2%;
             margin-bottom: 5px;
             margin-top: 15px;
         }
@@ -120,12 +119,14 @@
             cursor: pointer;
             border: 1px solid #ccc;
             padding: 10px;
+            width: 100%;
             background-color: #f9f9f9;
         }
 
         .terms-content {
             display: none;
             padding: 10px;
+            width: 100%;
             border: 1px solid #ccc;
             border-top: none;
             
@@ -150,7 +151,7 @@
         }
 
 
-        @media only screen and (min-width: 1500px) {
+        @media only screen and (min-width: 700px) {
             
             .width {
                 width: 30%;
@@ -260,7 +261,13 @@
                                 } else {
                                     var schoolNumber = document.getElementById("number").value;
                                     var studentID = document.getElementById("ID").value;
-                                    var url = `https://8926-180-217-42-146.ngrok-free.app/login?schoolNumber=${schoolNumber}&studentID=${studentID}`;
+                                    var studentmail = document.getElementById("emailadd").value;
+
+                                    var url = `/login?schoolNumber=${schoolNumber}&studentID=${studentID}&email=${studentmail}`;
+
+                                    document.getElementById("applyButton").innerHTML = "申請中...";
+                                    document.getElementById("applyButton").disabled = true;
+
                                     fetch(url)
                                     .then(response => response.text())
                                     .then(data => {
@@ -272,12 +279,16 @@
                                             document.getElementById("mail").innerHTML =  document.getElementById("emailadd").value;
                                         }else{
                                             alert("登入失敗，請檢察帳號或密碼");
+                                            document.getElementById("applyButton").innerHTML = "申請";
+                                            document.getElementById("applyButton").disabled = false;
                                         }
                                         
                                     })
                                     .catch(error => {
                                         alert("出現問題，請稍後再試");
                                         console.error('Error:', error);
+                                        document.getElementById("applyButton").innerHTML = "申請";
+                                        document.getElementById("applyButton").disabled = false;
                                     });
                                 }
 
@@ -294,7 +305,7 @@
 
                 <div class="page2">
 
-                    <div class="pageUp">
+                    <div class="pageUp" style="margin: 3%;">
                         
                         <h1 style="color: #383838;">成功訂閱</h1>
                         <h2 style="color: #525252;" id="username"></h2>
@@ -303,7 +314,6 @@
 
                         <h2 style="color: #525252;">在期末考期間，所有公布到系統上的成績都會即時發送到</h2>
                         <h2 style="color: #525252;" id="mail"></h2>
-
 
                     </div>
 

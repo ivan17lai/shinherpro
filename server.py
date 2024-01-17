@@ -8,13 +8,26 @@ from email.mime.text import MIMEText
 import json
 import time
 import random
+from datetime import datetime
 
 tester = '013333'
 testerPassword = ''
 examname = '期末考_1'
+#examname = '期中考2_1'
 
 with open('testerPassword.txt', 'r', encoding='utf-8') as file:
     testerPassword= file.read()
+
+score_box_html = '''
+
+<div class="subjectbox" style="max-width:30px">
+    <div class="rectangle" style="height:##thisishigh2;background-color:#ffffff"></div>
+    <div style="text-align:center;color:var(--text-color);font-size:12">##thisisscore</div>
+    <div class="rectangle" style="background-color:##thisiscolor;height:##thisishigh;max-width:30px"></div>
+    <div style="text-align:center;color:var(--text-color);font-size:12">##thisissub</div>
+</div>
+
+'''
 
 
 credentials = service_account.Credentials.from_service_account_file('shinherpro-411307-4f1771760028.json', scopes=['https://www.googleapis.com/auth/spreadsheets'])
@@ -49,7 +62,7 @@ last_result = []
 for subject_data in response[0]['Subjects']:
         last_result.append(subject_data)
 
-def send_mail(mailadd,examname,number,realscore,ranking,av):
+def send_mail(mailadd,examname,number,realscore,ranking,av,all_data):
 
     file_path = 'gmail_password.txt'
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -72,12 +85,55 @@ def send_mail(mailadd,examname,number,realscore,ranking,av):
     html_content = html_content.replace('##thisclassRank',str(ranking))
     html_content = html_content.replace('##thisIsAv',str(av))
     
+    current_time = datetime.now().time()
+    hour = current_time.hour
+    head_text = ''
+    if 6 <= hour < 11:
+        head_text = 'Hi!早安😇'
+    elif 12 <= hour < 18:
+        head_text = 'Hi!午安🫡'
+    else:
+        head_text = 'Hi!晚安😴'
+
+    html_content = html_content.replace('##headText',head_text)
+
     if realscore >= 60:
          html_content = html_content.replace('var(--MainGrade-color)','#00ff00')
     elif realscore >= 50:
          html_content = html_content.replace('var(--MainGrade-color)','#ffff00')
     else:
          html_content = html_content.replace('var(--MainGrade-color)','#ff0000')
+
+    if av >= 60:
+         html_content = html_content.replace('var(--classAverage-color)','#00ff00')
+    elif av >= 50:
+         html_content = html_content.replace('var(--classAverage-color)','#ffff00')
+    else:
+         html_content = html_content.replace('var(--classAverage-color)','#ff0000')
+
+
+    def get_color(score):
+        if score >= 60:
+            return '#00ff00'
+        elif score >= 50:
+            return '#ffff00'
+        else:
+            return '#ff0000'
+
+    all_score_box_html = ''
+    for subject_data in all_data:
+
+        this_score = score_box_html
+        this_score = this_score.replace('##thisiscolor',get_color(subject_data['Score']))
+        this_score = this_score.replace('##thisissub',subject_data['SubjectName'])
+        this_score = this_score.replace('##thisishigh2', str(150-(subject_data['Score']*1.5))+'px')
+        this_score = this_score.replace('##thisishigh', str(subject_data['Score']*1.5)+'px')
+
+        this_score = this_score.replace('##thisisscore', str(subject_data['Score']))
+        all_score_box_html += this_score
+
+    html_content = html_content.replace('<!-- ##thisIsTable -->',all_score_box_html)
+
 
     beta_user = ['013333','013314','013322','013325','013315','013304','013328','013335','013320','013308','013326','013321']
 
@@ -106,6 +162,29 @@ def send_mail(mailadd,examname,number,realscore,ranking,av):
 
 while True:
 
+    credentials = service_account.Credentials.from_service_account_file('shinherpro-411307-4f1771760028.json', scopes=['https://www.googleapis.com/auth/spreadsheets'])
+
+    spreadsheet_id = '1C3ZGa7ArEVRzH9hiox5Ggz-0jWrl9cHgD6Lc2STrWVQ'
+    sheet_name = '工作表1'
+
+    gc = gspread.Client(auth=credentials)
+    spreadsheet = gc.open_by_key(spreadsheet_id)
+    worksheet = spreadsheet.worksheet(sheet_name)
+
+    all_data = worksheet.get_all_values()
+
+    header = all_data[1]
+    users_data = all_data[2:]
+
+    users_list = []
+    for user_row in users_data:
+        user_dict = dict(zip(header, user_row))
+        users_list.append(user_dict)
+
+
+    print(f'user:{len(users_list)}')
+
+
     response = requests.get(base_url).text
 
     #response = input('輸入json:')
@@ -113,6 +192,9 @@ while True:
 
     subjects_list = []
     print(response[0]['Subjects'])
+
+
+
     
     for subject_data in response[0]['Subjects']:
         subjects_list.append(subject_data)
@@ -121,22 +203,27 @@ while True:
         for i,sub in enumerate(subjects_list):
              if sub not in last_result:
                 print(f'新增科目:{sub},序號{i}')
-                 
+                
+                c = 0
                 for user in users_list:
+                    if c > 2:
+                        input('按下Enter繼續發送剩下的人')
                     print(f'寄送給{user["email"]}')
                     
                     thisbase_url = f'http://xhinherpro.xamjiang.com/examScore?schoolNumber='+user['user']+ '&studentID=' + user['password'] +f'&examname={examname}'
                     print(thisbase_url)
                     thisresponse = requests.get(thisbase_url).text
                     #print(thisresponse)
+                    #thisresponse = input('輸入json22:')
                     thisresponse = json.loads(thisresponse)
 
                     this_result = []
                     for subject_data in thisresponse[0]['Subjects']:
                             this_result.append(subject_data)
 
-                    send_mail(user['email'],this_result[i]['SubjectName'], user['user'], this_result[i]['Score'], this_result[i]['ClassRank'], round(this_result[i]['ClassAVGScore'], 2))
+                    send_mail(user['email'],this_result[i]['SubjectName'], user['user'], this_result[i]['Score'], this_result[i]['ClassRank'], round(this_result[i]['ClassAVGScore'], 2),this_result)
                     sleep(1)
+                    c += 1
     else:
         print('沒有新科目'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))                
-    sleep(120+random.randint(0, 15)
+    sleep(120+random.randint(0, 15))

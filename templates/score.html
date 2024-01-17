@@ -119,7 +119,15 @@
             color: #000000c9;
             margin-top: 3%;
             margin-bottom: 3%;
+            display: flex;
+
         }
+
+        .subjectbox{
+            margin: 5px;
+        }
+
+
         th, td {
             padding: 5px; 
             text-align: center; 
@@ -158,6 +166,9 @@
             color: #000000e3;
             margin-top: 3%;
             margin-bottom: 3%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
 
         }
         .table2 th, .table2 td {
@@ -198,8 +209,9 @@
 
                     <div class="pageUp">
                         
-                        <h3 style="color: var(--text-color);font-size: 15px">你在期末考中的</h3>
-                        <h3 style="color: var(--text-color);font-size: 15px">##subject成績公布了!</h3>
+                        <h2 style="color: #141414;font-size: 18px">##headText</h2>
+                        <h3 style="color: #141414;font-size: 12px">你在期末考中的</h3>
+                        <h3 style="color: #141414;font-size: 12px">##subject成績公布了!</h3>
 
                     </div>
 
@@ -207,8 +219,8 @@
 
                     <div class="pageMain">
                         
-                        <h2 style="color: #000000;font-size: 20px">##subject</h2>
-                        <div class="Mainscore" style="font-size: 40px; color: var(--MainGrade-color)">##score</div>
+                        <h2 style="color: #000000;font-size: 17px">##subject</h2>
+                        <div class="Mainscore" style="font-size: 35px; color: var(--MainGrade-color)">##score</div>
                         <h3 style="color: #000000;"></h3>
 
                     </div>
@@ -218,16 +230,16 @@
                     <div class="underMain" style="align-items: center; justify-content: space-between;">
                         
                         <div class="block">
-                            <div class="centered-text" style="color: var(--text-color)!important; text-align: center;">
+                            <div class="centered-text" style="color: #141414; text-align: center;">
                                 <h3>班平均</h3>
                                 <div class="score centered-text" style="color: var(--classAverage-color); font-size: 20px;">##thisIsAv</div>
                             </div>
                         </div>
                         
                         <div class="block">
-                            <div class="centered-text" style="color: var(--text-color); text-align: center;">
+                            <div class="centered-text" style="color: #141414; text-align: center;">
                                 <h3>班排</h3>
-                                <div class="score centered-text" style="color: var(--classAveragedifference-color); font-size: 20px;">##thisclassRank</div>
+                                <div class="score centered-text" style="color: #ffc400 ; font-size: 20px;">##thisclassRank</div>
                             </div>
                         </div>
 
@@ -235,14 +247,15 @@
 
                     <h2 class="separator"></h2>
 
-                    <h3 class="centered-text0" style="color: var(--text-color);">已公布成績總分計算</h3>
+                    <h3 class="centered-text0" style="color: #141414;">已公布成績</h3>
                     <div class="sumGrade" style="align-items: center; justify-content: space-between;  flex-direction: column; ">
                         <div class="table-container">
-                            <table class="table1">
+                            
+                            <div class="table1" style="display: flex; justify-content: center;">
+                                
                                 <!-- ##thisIsTable -->
-                                (我先去睡覺 這個明天再說)
-
-                            </table>
+                                
+                            </div>
                             
                         </div>
                         

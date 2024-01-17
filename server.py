@@ -206,8 +206,7 @@ while True:
                 
                 c = 0
                 for user in users_list:
-                    if c > 2:
-                        input('按下Enter繼續發送剩下的人')
+
                     print(f'寄送給{user["email"]}')
                     
                     thisbase_url = f'http://xhinherpro.xamjiang.com/examScore?schoolNumber='+user['user']+ '&studentID=' + user['password'] +f'&examname={examname}'

@@ -29,7 +29,6 @@ score_box_html = '''
 
 '''
 
-
 credentials = service_account.Credentials.from_service_account_file('shinherpro-411307-4f1771760028.json', scopes=['https://www.googleapis.com/auth/spreadsheets'])
 
 spreadsheet_id = '1C3ZGa7ArEVRzH9hiox5Ggz-0jWrl9cHgD6Lc2STrWVQ'
@@ -84,7 +83,7 @@ def send_mail(mailadd,examname,number,realscore,ranking,av,all_data):
     html_content = html_content.replace('##score',str(realscore))
     html_content = html_content.replace('##thisclassRank',str(ranking))
     html_content = html_content.replace('##thisIsAv',str(av))
-    
+
     current_time = datetime.now().time()
     hour = current_time.hour
     head_text = ''
@@ -100,14 +99,14 @@ def send_mail(mailadd,examname,number,realscore,ranking,av,all_data):
     if realscore >= 60:
          html_content = html_content.replace('var(--MainGrade-color)','#00ff00')
     elif realscore >= 50:
-         html_content = html_content.replace('var(--MainGrade-color)','#ffff00')
+         html_content = html_content.replace('var(--MainGrade-color)','#ffe400')
     else:
          html_content = html_content.replace('var(--MainGrade-color)','#ff0000')
 
     if av >= 60:
          html_content = html_content.replace('var(--classAverage-color)','#00ff00')
     elif av >= 50:
-         html_content = html_content.replace('var(--classAverage-color)','#ffff00')
+         html_content = html_content.replace('var(--classAverage-color)','#ffe400')
     else:
          html_content = html_content.replace('var(--classAverage-color)','#ff0000')
 
@@ -116,9 +115,12 @@ def send_mail(mailadd,examname,number,realscore,ranking,av,all_data):
         if score >= 60:
             return '#00ff00'
         elif score >= 50:
-            return '#ffff00'
+            return '#ffe400'
         else:
             return '#ff0000'
+
+    html_content = html_content.replace('var(--UserAverage-color)',get_color(ranking)) 
+
 
     all_score_box_html = ''
     for subject_data in all_data:
@@ -129,7 +131,7 @@ def send_mail(mailadd,examname,number,realscore,ranking,av,all_data):
         this_score = this_score.replace('##thisishigh2', str(150-(subject_data['Score']*1.5))+'px')
         this_score = this_score.replace('##thisishigh', str(subject_data['Score']*1.5)+'px')
 
-        this_score = this_score.replace('##thisisscore', str(subject_data['Score']))
+        this_score = this_score.replace('##thisisscore', str(int(subject_data['Score'])))
         all_score_box_html += this_score
 
     html_content = html_content.replace('<!-- ##thisIsTable -->',all_score_box_html)
@@ -200,14 +202,16 @@ while True:
         subjects_list.append(subject_data)
 
     if len(subjects_list) > len(last_result):
+
         for i,sub in enumerate(subjects_list):
              if sub not in last_result:
                 print(f'新增科目:{sub},序號{i}')
                 
-                c = 0
+                mail_save = []
+
                 for user in users_list:
 
-                    print(f'寄送給{user["email"]}')
+                    print(f'查詢{user["email"]}')
                     
                     thisbase_url = f'http://xhinherpro.xamjiang.com/examScore?schoolNumber='+user['user']+ '&studentID=' + user['password'] +f'&examname={examname}'
                     print(thisbase_url)
@@ -220,9 +224,55 @@ while True:
                     for subject_data in thisresponse[0]['Subjects']:
                             this_result.append(subject_data)
 
-                    send_mail(user['email'],this_result[i]['SubjectName'], user['user'], this_result[i]['Score'], this_result[i]['ClassRank'], round(this_result[i]['ClassAVGScore'], 2),this_result)
+                    allAv = 0
+                    sub_s = {
+                        '國語文' : 2,
+                        '新聞英語' : 2,
+                        '英語文' : 2,
+                        '物聯網' : 3,
+                        '基本網路分析' : 3,
+                        '體育' : 2,
+                        '應用數學' : 2,
+                        '電子電路' : 3,
+                        '生活科技' : 1,
+                    }
+                    scount = 0
+                    ssum = 0
+                    for sub in this_result:
+                        try:
+                            ssum += sub['Score'] * sub_s[sub['SubjectName']]
+                            scount += sub_s[sub['SubjectName']]
+                        except:
+                            print('sub not found')
+                            pass
+                    
+                    allAv = ssum / scount
+
+
+                    mail_save.append(
+                        { 'email' : user['email'],
+                          'sub' : this_result[i]['SubjectName'],
+                          'user' : user['user'],
+                          'score' : this_result[i]['Score'],
+                          'classRank' : this_result[i]['ClassRank'],
+                          'ClassAVGScore' : round(this_result[i]['ClassAVGScore'], 2),
+                          'this_result' : this_result,
+                          'allAv' : round(allAv, 2),
+                        }
+                    )
+
+                
+
+
+
+                for mails in mail_save:
+
+                    print(f'寄送給{mails["email"]}')
+                    send_mail(mails['email'],mails['sub'],mails['user'],mails['score'],mails['allAv'],mails['ClassAVGScore'],mails['this_result'])
                     sleep(1)
-                    c += 1
+
+
+        last_result = subjects_list
     else:
         print('沒有新科目'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))                
     sleep(120+random.randint(0, 15))

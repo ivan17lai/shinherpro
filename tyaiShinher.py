@@ -192,8 +192,6 @@ def login(student_number,student_id):
 
     return response_second_post.json()['Result']['StudentName']
 
-
-
 def get_score(student_number,student_id,examname):
 
     login_url = 'https://shcloud11.k12ea.gov.tw/TYAITYC/Auth/Auth/CloudLogin'
@@ -537,7 +535,6 @@ def get_work(student_number,student_id):
     # print(response_second_post.text)
 
     return organize_absent_data(response_second_post.json())
-
 
 def get_credit(student_number,student_id):
 

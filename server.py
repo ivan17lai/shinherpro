@@ -275,4 +275,4 @@ while True:
         last_result = subjects_list
     else:
         print('沒有新科目'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))                
-    sleep(120+random.randint(0, 15))
+    sleep(60+random.randint(0, 15))

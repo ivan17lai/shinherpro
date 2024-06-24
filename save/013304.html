@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --text-color: black ;
+
+            --MainGrade-color: rgb(13, 236, 32) ;
+            
+            --classAveragedifference-color: rgb(13, 236, 32) ;
+            --classAverage-color: rgb(13, 236, 32) ;
+
+            --sumGrade-color: rgb(13, 236, 32) ;
+            --sumAverage-color: rgb(13, 236, 32) ;
+            --sumChange-color: rgb(13, 236, 32) ;
+
+        }
+        
+        .allpage {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            overflow: hidden;
+
+        
+        }
+
+        .logo-title {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100%;
+            margin: 30px auto;
+        }
+
+
+        .Main {
+            background-color: #ffffff;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .width {
+            margin: 0 auto;
+            border: 2px solid #dddddd;
+            width: 90%;
+        }
+
+        .separator {
+            border-bottom: 1px solid #dddddd;
+            margin: 20px 0;
+        }
+
+
+        .block {
+
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            width: 50%;
+        }
+
+        .underMain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+/* 
+        .pageMain {
+            background-image: url("https://imgur.com/qvfuoVU.gif");
+            background-size: cover;
+            background-repeat: no-repeat;
+            
+        } */
+
+        .sumGrade{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .down {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .centered-text {
+            font-size: 12px;
+        }
+
+        .device-pc
+        .device-phone
+        .note {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .device-pc {
+            display: none;
+        }
+
+        .device-phone {
+            display: block;
+        }
+
+        .table1 {
+            width:100%;
+            border-collapse: collapse;
+            color: #000000c9;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            display: flex;
+
+        }
+
+        .subjectbox{
+            margin: 5px;
+        }
+
+
+        th, td {
+            padding: 5px; 
+            text-align: center; 
+        }
+
+
+        .table-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            height: auto;
+            margin: 10% 10%;
+            border: 1px solid #ccc;
+            margin-top: 3%;
+            margin-bottom: 3%;
+        }
+
+        .table-container-sum {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            height: auto;
+            margin: 10% 10%;
+            border: 1px solid #ccc;
+            margin-top: 0%;
+            margin-bottom: 3%;
+        }
+
+        .haha {
+            background-image: url("https://imgur.com/qvfuoVU.gif");
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding-top: 10%;
+            padding-bottom: 5%;
+        }
+
+        .table2{
+            width:100%;
+            border-collapse: collapse;
+            color: #000000e3;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+
+        }
+        .table2 th, .table2 td {
+            padding: 0px;
+        }
+
+        @media only screen and (min-width: 700px) {
+            
+            .width {
+                width: 30%;
+            }
+
+            .device-pc {
+                display: block;
+            }
+
+            .device-phone {
+                display: none;
+            }
+
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="allpage" style="font-family: monospace; text-align: center;">
+
+        <div class="container" >
+
+
+            <div class="logo-title" style="font-size: 20px; font-weight: 300; font-family: monospace; color: #000000; text-align: center; vertical-align: middle; line-height: 100%;">ShinherPRO</div>
+
+            <div class="width">
+
+                <div class="Main">
+
+                    <div class="pageUp">
+                        
+                        <h2 style="color: #222222;font-size: 18px">今天6/4，我們要畢業了🎓</h2>
+                        <h3 style="color: #222222;font-size: 12px ; margin: 40px; margin-top: 5px;margin-bottom: 5px;">最後一天，我幫大家做了一些小小的統計。<br>數據大家參考就好，不要太認真喔</h3>
+
+                    </div>
+
+                    <h2 class="separator"></h2>
+
+                    <div class="haha">
+
+                        <div class="pageUp2">
+                            
+                            <img src="https://imgur.com/QFr2ztK.png" alt="Image" style="max-width: 34%; margin-bottom: 15px;">
+
+                        </div>
+                            
+                        
+
+                        <div class="pageUp" style="margin-bottom: 10px;margin-bottom: 10px;">
+                            
+                            <h2 style="color: #222222;font-size: 16px;margin-bottom: 10px;">經過努力，妳取得了192學分<br>必修100% 專業100% 實習100%</h2>
+
+                            <h2 style="color: #222222;font-size: 16px">3年來，優秀的妳只曠課11節<br>甚至有576天沒有遲到</h2>
+                            <h2 style="color: #222222;font-size: 10px;margin-top: 40px;">不論結果如何，邁向未來<br>希望每個人都可以成為自己想成為的人。加油！</h2>
+
+                        </div>
+
+                    </div>
+
+                    <h2 class="separator"></h2>
+
+                    <div class="pageUp">
+                        
+                        <h2 style="color: #222222;font-size: 18px">最後，該說再見了</h2>
+                        <h3 style="color: #222222;font-size: 12px ; margin: 40px; margin-top: 5px;margin-bottom: 20px;">當妳看到這則訊息時，代表我們即將離開北科附工。我們不再需要為段考而煩惱，當然也不會再收到成績通知信了。非常感謝妳對欣河PRO成績通知系統的支持，有了妳們的回饋我才有了持續更新的動力。最後，願妳們前程似錦，夢想成真，錄取理想中的那間學校。🫡</h3>
+
+                    </div>
+
+
+                
+
+
+                </div>
+
+                
+            </div>
+
+            <div class="down">
+
+                <p class="note" style="color: #474747;">ShinherPRO 2, 2024-6-4 </p>
+                <p class="note" style="color: #474747;">Design for TYAI</p>
+                <p class="note" style="color: #474747;">-</p>
+                <p class="note" style="color: #474747;">ByeBye各位~</p>
+
+                
+                <!--beta User-->
+
+            </div>
+            
+        </div>
+
+        
+
+    </div>
+</html>
+</html>

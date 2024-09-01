@@ -175,6 +175,8 @@ def login():
         
         response = tyaiShinher.login(arg1, arg2)
 
+        print('成功登入 帳號密碼正確')
+
         writeData(request.args,response,arg1)
 
         end_time = time.time()
@@ -183,7 +185,7 @@ def login():
         print(f"Request processed in {elapsed_time} seconds")
 
     except Exception as e:
-        response = str(e)
+        response = 'error'
 
     return response
 
